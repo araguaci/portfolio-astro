@@ -1,0 +1,29 @@
+{
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"target": "es6",
+		"allowJs": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"jsx": "react",
+		"isolatedModules": true,
+		"incremental": true,
+		"allowSyntheticDefaultImports": true,
+		"types": ["@astrojs/image/client"],
+		// "verbatimModuleSyntax": true,
+		"paths": {
+			"@/components/*": ["src/components/*.astro"],
+			"@/layouts/*": ["src/layouts/*.astro"],
+			"@/utils": ["src/utils/index.ts"],
+			"@/data/*": ["src/data/*"],
+			"@/site-config": ["src/data/site.config.ts"],
+			"@/styles": ["src/styles/"],
+			"@/*": ["src/*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.tsx", "**/*.astro"],
+	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+}

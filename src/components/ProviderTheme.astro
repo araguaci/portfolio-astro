@@ -1,0 +1,48 @@
+<script is:inline>
+	if (localStorage.theme === 'light' || !('theme' in localStorage)) {
+		document.documentElement.classList.remove('dark')
+		localStorage.setItem('theme', 'light')
+	} else {
+		document.documentElement.classList.add('dark')
+		localStorage.setItem('theme', 'dark')
+	}
+</script>
+
+<script>
+	// First we check if you support touch, otherwise it's click:
+	// const touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+	// Then we bind via thát event. This way we only bind one event, instead of the two as below
+	// document.getElementById('hbs').addEventListener(touchEvent, someFunction);
+	// const isDarkMode = document.documentElement.classList.contains('dark')
+	const iconTheme = document.querySelector('.theme')
+	const sunIcon = document.querySelector('.sun-logo')
+	const moonIcon = document.querySelector('.moon-logo')
+	const theme = localStorage.getItem('theme')
+	const touchEvent = 'onclick' in window ? 'click' : 'touchstart'
+
+	if (theme === 'dark') {
+		moonIcon.classList.toggle('opacity-0')
+		sunIcon.classList.add('animate-sun')
+	} else {
+		sunIcon.classList.toggle('opacity-0')
+		moonIcon.classList.add('animate-moon')
+	}
+
+	if (iconTheme !== null) {
+		iconTheme.addEventListener(touchEvent, () => {
+			document.documentElement.classList.toggle('dark')
+			sunIcon.classList.toggle('animate-sun')
+			moonIcon.classList.toggle('animate-moon')
+
+			if (document.documentElement.classList.contains('dark')) {
+				localStorage.setItem('theme', 'dark')
+				moonIcon.classList.toggle('opacity-0')
+				sunIcon.classList.toggle('opacity-0')
+			} else {
+				localStorage.setItem('theme', 'light')
+				sunIcon.classList.toggle('opacity-0')
+				moonIcon.classList.toggle('opacity-0')
+			}
+		})
+	}
+</script>

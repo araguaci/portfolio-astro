@@ -1,0 +1,59 @@
+---
+import LinkButton from '@/components/LinkButton'
+import ListCategories from '@/components/ListCategories'
+import ListPosts from '@/components/ListPosts'
+import TitlePage from '@/components/TitlePage'
+import BaseLayout from '@/layouts/BaseLayout'
+import { getPosts } from '@/utils'
+import { sortByDate } from '@/lib/utils/sortFunctions'
+
+const MAX_POSTS = 10 // max number of posts to show on the home page
+const posts = await getPosts(MAX_POSTS)
+const sortedPosts = sortByDate(posts)
+---
+
+<BaseLayout title='Home'>
+	<TitlePage title='Blog Title' />
+
+	<section id='hero'>
+		<p>
+			Astro Open Blog is a minimal, responsive, accessible and SEO-friendly Astro blog theme. Light
+			and dark mode are supported by default. Moreover, additional color schemes can also be
+			configured.
+		</p>
+		<p>
+			Read the blog posts or check
+			<LinkButton
+				className='underline underline-offset-4 decoration-dashed'
+				href='https://github.com/malachaifrazier/astro-openblog-template#readme'
+			>
+				README
+			</LinkButton> for more info.
+		</p>
+	</section>
+
+	<ListCategories />
+
+	<section>
+		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
+		<ListPosts FirstBig={true} posts={posts} />
+	</section>
+</BaseLayout>
+
+<script>
+	import { animate } from 'motion'
+	const showAnimations = localStorage.getItem('animations') === 'true'
+
+	if (showAnimations) {
+		animate(
+			'.title',
+			{ y: [80, 0], opacity: [0, 1] },
+			{
+				duration: 2.5,
+				opacity: { duration: 3 },
+
+				offset: [0, 0.55, 0.75]
+			}
+		)
+	}
+</script>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout'
+import ListPosts from '@/components/ListPosts'
+import ListCategories from '@/components/ListCategories'
+import TitlePage from '@/components/TitlePage'
+import { sluglify, unsluglify, getCategories, filterPostsByCategory } from '@/utils'
+// import Shape from '@/components/icons/Shape'
+// import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
+
+const { category } = Astro.params
+
+export async function getStaticPaths() {
+	const categories = await getCategories()
+
+	return categories.map((category) => ({
+		params: { category: sluglify(category.toLowerCase()) },
+		props: category
+	}))
+}
+
+const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
+const filterPosts = await filterPostsByCategory(unsluglifyNameCategory)
+// const posts = await getPosts()
+// const filterPosts = posts.filter(
+// 	(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+// )
+---
+
+<BaseLayout title={category}>
+	<!-- <div class='flex justify-start items-center gap-2'>
+		<Shape />
+		<h1 class='text-5xl font-semibold tracking-wide first-letter:uppercase'>
+			{unsluglifyNameCategory}
+		</h1>
+		<a
+			target='_blank'
+			href='/rss.xml'
+			class='rss-link hidden sm:block'
+			aria-label='rss feed'
+			title='RSS Feed'
+		>
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				class='rss-icon'
+				fill='url("#SvgjsLinearGradient3010")'
+				><path d='M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z'></path><path
+					d='M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z'></path><circle
+					cx='6'
+					cy='18'
+					r='2'></circle>
+			</svg>
+		</a>
+	</div> -->
+	<TitlePage title={unsluglifyNameCategory} />
+	<ListCategories activeCategory={category} />
+	<ListPosts posts={filterPosts} />
+</BaseLayout>

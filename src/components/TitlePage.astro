@@ -1,0 +1,26 @@
+---
+import Title from './Title.astro'
+import Shape from './icons/Shape.astro'
+import RssIcon from '@/components/icons/RssIcon'
+type Props = {
+	title: string
+}
+const { title } = Astro.props
+---
+
+<div class='flex justify-start items-center gap-2 title'>
+	<Shape />
+	<Title>{title}</Title>
+	<!-- <a target='_blank' href='/rss.xml' class='rss-link hidden sm:block' -->
+	<!-- aria-label='rss feed' title='RSS Feed'> -->
+	<a
+		target='_blank'
+		href='/rss.xml'
+		rel='prefetch'
+		class='flex items-center gap-1 text-2xl md:text-base rss-link hidden sm:block'
+		aria-label='rss feed'
+		title='RSS Feed'
+	>
+		<span><RssIcon /></span>
+	</a>
+</div>

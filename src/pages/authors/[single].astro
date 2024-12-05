@@ -1,0 +1,34 @@
+---
+// import BaseLayout from '@/layouts/BaseLayout'
+// import ListPosts from '@/components/ListPosts'
+// import ListCategories from '@/components/ListCategories'
+// import Shape from '@/components/icons/Shape'
+// import { getSinglePage } from '@/lib/contentParser.astro'
+// import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
+// const { category, author } = Astro.params
+
+export async function getStaticPaths() {
+	//   const categories = await getCategories()
+	return []
+	//   return categories.map((category) => ({
+	//     params: { category: sluglify(category.toLowerCase()) },
+	//     props: category
+	//   }))
+}
+
+// const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
+
+// const posts = await getPosts()
+// const filterPosts = posts.filter(
+//   (post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+// )
+---
+
+<!-- <BaseLayout title={author}>
+  <div class='flex justify-start items-center gap-2'>
+    <Shape />
+    <h1 class='text-5xl font-semibold tracking-wide first-letter:uppercase'>
+      {unsluglifyNameCategory}
+    </h1>
+  </div>
+</BaseLayout> -->

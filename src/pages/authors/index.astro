@@ -1,0 +1,31 @@
+---
+import AuthorCard from '@/components/AuthorCard'
+import BaseLayout from '@/layouts/BaseLayout'
+import ListPosts from '@/components/ListPosts'
+import ListCategories from '@/components/ListCategories'
+import Shape from '@/components/icons/Shape'
+import { sluglify, unsluglify, getCategories, getPosts, getAuthors } from '@/utils'
+import { getCollection } from 'astro:content'
+import { getSinglePage } from '@/lib/contentParser.astro'
+import { getEntryBySlug } from 'astro:content'
+
+const { category, author } = Astro.params
+const authorIndex = await getEntryBySlug<any, string>('authors', '-index')
+const authors = await getSinglePage('authors')
+---
+
+<BaseLayout title={author}>
+	<section class='section-sm pb-0'>
+		<div class='container'>
+			<div class='row justify-center'>
+				{
+					authors.map((author) => (
+						<div class='mb-14 md:col-6 lg:col-4'>
+							<AuthorCard data={author} />
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</BaseLayout>
