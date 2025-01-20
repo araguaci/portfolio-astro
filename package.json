@@ -44,7 +44,7 @@
 		"@astrojs/sitemap": "3.0.0",
 		"@astrojs/tailwind": "5.0.0",
 		"@pagefind/default-ui": "^1.0.3",
-		"@tailwindcss/typography": "0.5.10",
+		"@tailwindcss/typography": "0.5.16",
 		"@typescript-eslint/parser": "^6.7.0",
 		"clsx": "2.0.0",
 		"eslint": "^8.49.0",
